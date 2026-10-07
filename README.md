@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🌊 HydroGrid // Delhi-NCR Climate Telemetry & Civic Action Platform
 
 > **HydroGrid** is an immersive, production-ready geospatial full-stack application addressing Delhi-NCR's twin climate crises: blistering urban heat islands (**Summer Drought Mode**) and catastrophic urban inundation (**Monsoon Flood Mode**).
@@ -125,3 +126,6 @@ npm run build
 
 ## 🛡️ License
 MIT License &bull; HydroGrid Project
+=======
+# HydroGrid
+>>>>>>> 9bd9a48cc1e4c637453b691b0289a869321a8267
