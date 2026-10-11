@@ -7,6 +7,9 @@ const telemetryRoutes = require('./routes/telemetry');
 const satelliteRoutes = require('./routes/satellite');
 const verificationRoutes = require('./routes/verification');
 const leaderboardRoutes = require('./routes/leaderboard');
+const authRoutes = require('./routes/auth');
+const broadcastRoutes = require('./routes/broadcast');
+const dispatchRoutes = require('./routes/dispatch');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -19,8 +22,11 @@ app.use(express.urlencoded({ extended: true }));
 // API Routes
 app.use('/api/telemetry', telemetryRoutes);
 app.use('/api/satellite', satelliteRoutes);
-app.use('/api', verificationRoutes); // mounts /api/verify-incident and /api/incidents
+app.use('/api', verificationRoutes); // mounts /api/verify-incident, /api/incidents, /api/incidents/:id/status
 app.use('/api/leaderboard', leaderboardRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/broadcasts', broadcastRoutes);
+app.use('/api/dispatch', dispatchRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

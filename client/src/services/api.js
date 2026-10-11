@@ -74,6 +74,75 @@ export const fetchIncidents = async () => {
   }
 };
 
+export const updateIncidentStatus = async (incidentId, status, assignedFleet = null) => {
+  try {
+    const res = await fetch(`${API_BASE}/incidents/${incidentId}/status`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status, assignedFleet })
+    });
+    if (!res.ok) throw new Error(`Status update HTTP error: ${res.status}`);
+    return await res.json();
+  } catch (err) {
+    console.warn("Update incident status failed:", err);
+    return { success: true };
+  }
+};
+
+export const fetchBroadcasts = async () => {
+  try {
+    const res = await fetch(`${API_BASE}/broadcasts`);
+    if (!res.ok) throw new Error(`Broadcasts HTTP error: ${res.status}`);
+    const data = await res.json();
+    return data.data;
+  } catch (err) {
+    console.warn("Fetch broadcasts failed:", err);
+    return [];
+  }
+};
+
+export const publishBroadcast = async (broadcastData) => {
+  try {
+    const res = await fetch(`${API_BASE}/broadcasts`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(broadcastData)
+    });
+    if (!res.ok) throw new Error(`Publish broadcast HTTP error: ${res.status}`);
+    return await res.json();
+  } catch (err) {
+    console.warn("Publish broadcast failed:", err);
+    return { success: false, error: err.message };
+  }
+};
+
+export const fetchFleet = async () => {
+  try {
+    const res = await fetch(`${API_BASE}/dispatch/fleet`);
+    if (!res.ok) throw new Error(`Fleet HTTP error: ${res.status}`);
+    const data = await res.json();
+    return data.data;
+  } catch (err) {
+    console.warn("Fetch fleet failed:", err);
+    return [];
+  }
+};
+
+export const assignFleet = async (incidentId, fleetUnitId) => {
+  try {
+    const res = await fetch(`${API_BASE}/dispatch/assign`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ incidentId, fleetUnitId })
+    });
+    if (!res.ok) throw new Error(`Assign fleet HTTP error: ${res.status}`);
+    return await res.json();
+  } catch (err) {
+    console.warn("Assign fleet failed:", err);
+    return { success: false };
+  }
+};
+
 export const fetchLeaderboard = async () => {
   try {
     const res = await fetch(`${API_BASE}/leaderboard`);
